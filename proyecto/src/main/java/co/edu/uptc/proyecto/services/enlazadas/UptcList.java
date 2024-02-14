@@ -3,6 +3,10 @@ package co.edu.uptc.proyecto.services.enlazadas;
 public class UptcList<T> {
     private Nodo<T> header = null;
     
+    
+    /**
+     * Añade un nuevo elemento a la lista
+     */
     public void add(T info){
         Nodo nodo = new Nodo();
         nodo.setInfo(info);
@@ -18,6 +22,18 @@ public class UptcList<T> {
             ultimo.setNext(nodo);
         }
     }
+
+    /**
+     * Elimina el ultimo elemento de la lista
+    */
+    public void remove(){
+        Nodo<T> penultimo = header;
+        while((penultimo.getNext()).getNext()!= null){
+            penultimo = penultimo.getNext();
+        }
+        penultimo.setNext(null);
+    }
+
 
 
     

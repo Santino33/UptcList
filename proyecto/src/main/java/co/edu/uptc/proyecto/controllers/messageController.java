@@ -45,6 +45,8 @@ public class messageController {
         uptcList.add(persona3);
         uptcList.add(persona4);
 
+        uptcList.remove();
+
         showInfo(uptcList);
 
         return "HOLA uptc";
