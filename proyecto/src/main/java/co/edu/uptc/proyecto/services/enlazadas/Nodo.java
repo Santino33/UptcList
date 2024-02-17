@@ -11,6 +11,17 @@ public class Nodo<T> {
 
     }
 
+    public Nodo(T info) {
+        this.info = info;
+    }
+
+
+    public Nodo(T info, Nodo next) {
+        this.info = info;
+        this.next = next;
+    }
+
+
 
     public T getInfo() {
         return this.info;

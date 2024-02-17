@@ -34,18 +34,28 @@ public class messageController {
 
         Person persona3 = new Person();
         persona3.setName("Carlos");
-        persona3.setLastName("Botero");
+        persona3.setLastName("Sainz");
 
         Person persona4 = new Person();
         persona4.setName("Lando");
         persona4.setLastName("Norris");
+
+        Person persona5 = new Person();
+        persona5.setName("Jenson");
+        persona5.setLastName("Button");
+
+
 
         uptcList.add(persona1);
         uptcList.add(persona2);
         uptcList.add(persona3);
         uptcList.add(persona4);
 
-        uptcList.remove();
+        uptcList.add(4, persona5);
+
+        //uptcList.remove(1);
+        //uptcList.remove(3);
+        //System.out.println("Found: "+uptcList.contains(persona4));
 
         showInfo(uptcList);
 
@@ -54,11 +64,12 @@ public class messageController {
 
     public void showInfo(UptcList <Person> uptcList ){
         Nodo <Person> nodoImprimible = uptcList.getHeader();
+        int counter = 0;
         while (nodoImprimible.getNext() != null) {
-            System.out.println(nodoImprimible.getInfo().getName() + ": " + nodoImprimible.getInfo().getLastName());
+            System.out.println(nodoImprimible.getInfo().getName() + " " + nodoImprimible.getInfo().getLastName()+ " -> " + counter) ;
             nodoImprimible = (Nodo <Person>)nodoImprimible.getNext();
+            counter++;
         }
-        System.out.println(nodoImprimible.getInfo().getName() + ": " + nodoImprimible.getInfo().getLastName());
-
+        System.out.println(nodoImprimible.getInfo().getName() + " " + nodoImprimible.getInfo().getLastName()+ " -> " + counter);
     }
 }
