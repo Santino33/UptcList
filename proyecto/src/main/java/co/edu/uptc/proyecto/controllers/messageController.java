@@ -44,20 +44,33 @@ public class messageController {
         persona5.setName("Jenson");
         persona5.setLastName("Button");
 
+        Person persona6 = new Person();
+        persona6.setName("George");
+        persona6.setLastName("Russell");
+
 
 
         uptcList.add(persona1);
-        uptcList.add(persona2);
-        uptcList.add(persona3);
-        uptcList.add(persona4);
-
+        uptcList.add(1, persona2);
+        uptcList.add(2, persona3);
+        uptcList.add(3, persona4);
         uptcList.add(4, persona5);
+        uptcList.add(5, persona6);
+
+
+
+        System.out.println("IndexOf PER " + uptcList.indexOf(persona1));
+        System.out.println("IndexOf VER " + uptcList.indexOf(persona2));
+        System.out.println("IndexOf SAI " + uptcList.indexOf(persona3));
+        System.out.println("IndexOf NOR " + uptcList.indexOf(persona4));
+        System.out.println("IndexOf BUT " + uptcList.indexOf(persona5));
+        System.out.println("IndexOf RUS " + uptcList.indexOf(persona6));
+
+
+        System.out.println("Find BUTTON: " + uptcList.findNode(persona4).getNext().getInfo().toString());
 
         //uptcList.remove(1);
         //uptcList.remove(3);
-        System.out.println("Antes de contains");
-        System.out.println("Found: "+uptcList.contains(persona1));
-
         showInfo(uptcList);
 
         return "HOLA uptc";

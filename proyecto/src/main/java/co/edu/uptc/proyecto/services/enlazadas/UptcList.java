@@ -39,6 +39,8 @@ public class UptcList<T> implements List<T>{
         return header;
     }
 
+
+
     @Override
     public int size() {
         // TODO Auto-generated method stub
@@ -186,14 +188,28 @@ public class UptcList<T> implements List<T>{
 
     @Override
     public int indexOf(Object o) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'indexOf'");
+        Nodo temp = header;
+        boolean found = false;
+        int index = 0;
+
+        while (!found && temp != null){
+            if (o.equals(temp.getInfo())) {
+                found = true;
+            }
+            else {
+                temp = temp.getNext();
+                index++;
+            }
+        }
+        if (!found) index = -1;
+        return index;
+
     }
 
     @Override
     public int lastIndexOf(Object o) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'lastIndexOf'");
+        throw new UnsupportedOperationException("Unimplemented method 'indexOf'");
     }
 
     @Override
@@ -240,5 +256,25 @@ public class UptcList<T> implements List<T>{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'remove'");
     }
+
+    private Nodo findNode(int index){
+        Nodo temp = header;
+        for(int i = 0; i < index; i++){
+            temp = temp.getNext();
+        }
+        return temp;
+    }
+
+    public Nodo findNode(Object o){
+        Nodo temp = header;
+        boolean found = false;
+        while(found && temp.getNext() != null){
+            if (o.equals(temp.getInfo())){
+                found = true;
+            }else temp = temp.getNext();
+        }
+        return temp;
+    }
+
 
 }
