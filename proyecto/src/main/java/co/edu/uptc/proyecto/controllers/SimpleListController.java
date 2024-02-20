@@ -19,9 +19,10 @@ public class SimpleListController {
         prueba.add("C");
         prueba.add("D");
 
-        prueba.add(-1, "Prueba");
+        prueba.add(1, "Prueba");
         //prueba.remove(5);
         mostrarArray(prueba);
+        System.out.println("Contains: "+prueba.contains("C"));
         return "Prueba hecha";
     }
 

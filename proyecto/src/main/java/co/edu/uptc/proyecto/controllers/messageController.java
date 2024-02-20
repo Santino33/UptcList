@@ -55,7 +55,8 @@ public class messageController {
 
         //uptcList.remove(1);
         //uptcList.remove(3);
-        //System.out.println("Found: "+uptcList.contains(persona4));
+        System.out.println("Antes de contains");
+        System.out.println("Found: "+uptcList.contains(persona1));
 
         showInfo(uptcList);
 

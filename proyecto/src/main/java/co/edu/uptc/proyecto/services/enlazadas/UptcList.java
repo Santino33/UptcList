@@ -15,28 +15,6 @@ public class UptcList<T> implements List<T>{
     }
 
 
-    
-    /**
-     * Añade un nuevo elemento a la lista
-     */
-    public void add1(T info){
-        
-    }
-
-    public boolean add2(T info){
-        Nodo <T> tmp = new Nodo<T>();
-        tmp.setInfo(info);
-
-        if (header == null){
-            header = tmp;
-            footer = header;
-        } else{
-            footer.setNext(tmp);
-            footer = tmp;
-        }
-        return false;
-    }
-
     /**
      * Elimina el ultimo elemento de la lista
     */
@@ -47,35 +25,6 @@ public class UptcList<T> implements List<T>{
         }
         penultimate.setNext(null);
     }
-
-    /**
-     * Elimina de la lista un elemento especificado por parametro 
-     * @param info Elemento a borrar de la lista
-     * @return Eliminacion exitosa o no del elemento
-     
-    public boolean remove(T info){
-        Nodo<T> deleted = header;
-        Nodo<T> before = header;
-        Nodo<T> after = header;
-
-        boolean found = false;
-
-        while (deleted.getNext()!=null) {
-            after = after.getNext();
-            if(deleted.getInfo() == info) {
-                before.setNext(after);
-                deleted.setNext(null);
-                found = true;
-            }
-            else{
-                before = deleted;
-                deleted = after;
-                after = after.getNext();
-            }
-        }
-        return found;
-    }
-    */
     
 
     public Nodo<T> setFooterToLastElement(){
@@ -104,11 +53,13 @@ public class UptcList<T> implements List<T>{
 
     @Override
     public boolean contains(Object o) {
-        boolean found = false;
-        while(header.getNext()!=null) {
-            
+        Nodo<T> temp = header;
+        Boolean result = false;
+        while (!result && temp.getNext() != null) {
+            if (o.equals(temp.getInfo())) result = true;
+            else temp = temp.getNext();
         }
-        return found;
+        return result;
     }
 
     @Override
@@ -199,7 +150,6 @@ public class UptcList<T> implements List<T>{
         }catch(NullPointerException e){
             e.printStackTrace();
         }
-        
     }
 
     @Override
