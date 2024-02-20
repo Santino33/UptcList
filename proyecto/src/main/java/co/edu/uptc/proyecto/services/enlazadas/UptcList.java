@@ -34,7 +34,6 @@ public class UptcList<T> implements List<T>{
         }
         return footer;
     }
-    
     public Nodo <T> getHeader(){
         return header;
     }
@@ -209,7 +208,7 @@ public class UptcList<T> implements List<T>{
     @Override
     public int lastIndexOf(Object o) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'indexOf'");
+        throw new UnsupportedOperationException("Unimplemented method 'listIterator'");
     }
 
     @Override
