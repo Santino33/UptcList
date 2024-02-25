@@ -115,8 +115,13 @@ public class UptcList<T> implements List<T>{
 
     @Override
     public void clear() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'clear'");
+        Nodo<T> temp = header;
+        Nodo<T> before = header;
+        while (temp.getNext() != null) {
+            before = temp;
+            temp = temp.getNext();
+            before.setNext(null);
+        }
     }
 
     @Override

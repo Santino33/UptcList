@@ -50,7 +50,6 @@ public class messageController {
         persona6.setName("George");
         persona6.setLastName("Russell");
 
-        /*
         uptcList.add(persona1);
         uptcList.add(persona2);
         uptcList.add(persona3);
@@ -58,25 +57,20 @@ public class messageController {
         uptcList.add(persona5);
         uptcList.add(5, persona6);
 
-         */
+        uptcList.clear();
+        System.out.println("Size: " + uptcList.size());
 
-
-        System.out.println("Removed: "+uptcList.remove(6).getLastName() + "\n");
-        //uptcList.remove(1);
-        //uptcList.remove(3);
         showInfo(uptcList);
 
         return "HOLA uptc";
     }
 
     public void showInfo(UptcList <Person> uptcList ){
-        Nodo <Person> nodoImprimible = uptcList.getHeader();
-        int counter = 0;
-        while (nodoImprimible.getNext() != null) {
-            System.out.println(nodoImprimible.getInfo().getName() + " " + nodoImprimible.getInfo().getLastName()+ " -> " + counter) ;
-            nodoImprimible = (Nodo <Person>)nodoImprimible.getNext();
+        Iterator<Person> it = uptcList.iterator();
+        while (it.hasNext()){
+            int counter = 0;
+            System.out.println(it.next().getName() + " " + it.next().getLastName()+ " -> " + counter);
             counter++;
         }
-        System.out.println(nodoImprimible.getInfo().getName() + " " + nodoImprimible.getInfo().getLastName()+ " -> " + counter);
     }
 }
