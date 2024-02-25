@@ -167,18 +167,15 @@ public class UptcList<T> implements List<T>{
         if (deleted == null) {
             throw new NoSuchElementException("The list is empty");
         }
-        try{
-            for(int i =0; i < index; i++){
-                before = deleted;
-                deleted = deleted.getNext();
+        for(int i =0; i < index; i++){
+            before = deleted;
+            deleted = deleted.getNext();
 
-                if (deleted == null){
-                    throw new IndexOutOfBoundsException("Index specified is out of bounds");
-                }
+            if (deleted == null){
+                throw new IndexOutOfBoundsException("Index specified is out of bounds");
             }
-        }catch (IndexOutOfBoundsException e){
-            e.printStackTrace();
         }
+
         //Evaluar para eliminar el index 0 de la lista
         if (before != deleted){
             before.setNext(deleted.getNext());

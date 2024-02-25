@@ -50,8 +50,9 @@ public class messageController {
         persona6.setName("George");
         persona6.setLastName("Russell");
 
+        /*
         uptcList.add(persona1);
-        /*uptcList.add(persona2);
+        uptcList.add(persona2);
         uptcList.add(persona3);
         uptcList.add(persona4);
         uptcList.add(persona5);
@@ -59,7 +60,8 @@ public class messageController {
 
          */
 
-        System.out.println("Removed: "+uptcList.remove(0).getLastName() + "\n");
+
+        System.out.println("Removed: "+uptcList.remove(6).getLastName() + "\n");
         //uptcList.remove(1);
         //uptcList.remove(3);
         showInfo(uptcList);

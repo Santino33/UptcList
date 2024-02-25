@@ -20,7 +20,7 @@ public class SimpleListController {
         prueba.add("C");
         prueba.add("D");
 
-        System.out.println(prueba.remove(3)+ "\n");
+        System.out.println(prueba.remove(4)+ "\n");
         mostrarArray(prueba);
         return "Prueba hecha";
     }
