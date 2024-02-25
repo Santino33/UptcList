@@ -1,6 +1,7 @@
 package co.edu.uptc.proyecto.controllers;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +21,15 @@ public class SimpleListController {
         prueba.add("D");
 
         prueba.add(1, "Prueba");
+        Iterator<String> it = prueba.iterator();
+
+        while(it.hasNext()){
+            String s = it.next();
+            System.out.println(s);
+        }
+        System.out.println(it.next());
         //prueba.remove(5);
-        mostrarArray(prueba);
+        //mostrarArray(prueba);
         return "Prueba hecha";
     }
 

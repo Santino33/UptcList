@@ -1,9 +1,6 @@
 package co.edu.uptc.proyecto.services.enlazadas;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class UptcList<T> implements List<T>{
     private Nodo<T> header;
@@ -43,8 +40,13 @@ public class UptcList<T> implements List<T>{
 
     @Override
     public int size() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'size'");
+        Nodo temp = header;
+        int counter = 0;
+        while (temp.getNext() != null){
+            counter++;
+            temp = temp.getNext();
+        }
+        return counter;
     }
 
     @Override
@@ -66,8 +68,7 @@ public class UptcList<T> implements List<T>{
 
     @Override
     public Iterator<T> iterator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'iterator'");
+        return new MyIterator();
     }
 
     @Override
@@ -120,7 +121,11 @@ public class UptcList<T> implements List<T>{
 
     @Override
     public T get(int pos) {
-        throw new UnsupportedOperationException("Unimplemented method 'set'");
+        Nodo<T> aux = header;
+        for (int i = 0; i < pos; i++) {
+            aux = aux.getNext();
+        }
+        return (T) aux.getInfo();
     }
 
     @Override
@@ -274,6 +279,37 @@ public class UptcList<T> implements List<T>{
             }else temp = temp.getNext();
         }
         return temp;
+    }
+
+
+
+    private class MyIterator implements Iterator<T>{
+
+        private int actualIndex;
+        private int size;
+        private Nodo temp;
+        public MyIterator() {
+            actualIndex = 0;
+            size = size();
+        }
+
+        @Override
+        public boolean hasNext() {
+            return actualIndex < size;
+        }
+
+        @Override
+        public T next() {
+            if(!hasNext()){
+                throw new NoSuchElementException("There are no more elements");
+            } else if (temp == null) {
+                temp = header;
+                return (T) temp.getInfo();
+            }
+            actualIndex++;
+            temp = temp.getNext();
+            return (T)(temp.getInfo());
+        }
     }
 
 

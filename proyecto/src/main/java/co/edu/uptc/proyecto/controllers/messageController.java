@@ -9,6 +9,8 @@ import co.edu.uptc.proyecto.services.PersonService;
 import co.edu.uptc.proyecto.services.enlazadas.Nodo;
 import co.edu.uptc.proyecto.services.enlazadas.UptcList;
 
+import java.util.Iterator;
+
 @RestController
 @RequestMapping("/message")
 public class messageController {
@@ -48,27 +50,23 @@ public class messageController {
         persona6.setName("George");
         persona6.setLastName("Russell");
 
-
-
         uptcList.add(persona1);
-        uptcList.add(1, persona2);
-        uptcList.add(2, persona3);
-        uptcList.add(3, persona4);
-        uptcList.add(4, persona5);
-        uptcList.add(5, persona6);
+        uptcList.add(persona2);
+        uptcList.add(persona3);
+        uptcList.add(persona4);
+        uptcList.add(persona5);
+        uptcList.add(persona6);
 
+        System.out.println("get(0)" + uptcList.get(0).getName() + " " + uptcList.get(0).getLastName());
+        System.out.println("get(2)" + uptcList.get(2).getName() + " " + uptcList.get(2).getLastName());
+        System.out.println("get(5)" + uptcList.get(5).getName() + " " + uptcList.get(5).getLastName());
 
-
-        System.out.println("IndexOf PER " + uptcList.indexOf(persona1));
-        System.out.println("IndexOf VER " + uptcList.indexOf(persona2));
-        System.out.println("IndexOf SAI " + uptcList.indexOf(persona3));
-        System.out.println("IndexOf NOR " + uptcList.indexOf(persona4));
-        System.out.println("IndexOf BUT " + uptcList.indexOf(persona5));
-        System.out.println("IndexOf RUS " + uptcList.indexOf(persona6));
-
-
-        System.out.println("Find BUTTON: " + uptcList.findNode(persona4).getNext().getInfo().toString());
-
+        System.out.println("\n Prueba Iterator");
+        Iterator<Person> myIterator = uptcList.iterator();
+        while (myIterator.hasNext()) {
+            Person actualPerson = myIterator.next();
+            System.out.println(actualPerson.getName() + " " + actualPerson.getLastName());
+        }
         //uptcList.remove(1);
         //uptcList.remove(3);
         showInfo(uptcList);
