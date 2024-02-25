@@ -51,22 +51,15 @@ public class messageController {
         persona6.setLastName("Russell");
 
         uptcList.add(persona1);
-        uptcList.add(persona2);
+        /*uptcList.add(persona2);
         uptcList.add(persona3);
         uptcList.add(persona4);
         uptcList.add(persona5);
-        uptcList.add(persona6);
+        uptcList.add(5, persona6);
 
-        System.out.println("get(0)" + uptcList.get(0).getName() + " " + uptcList.get(0).getLastName());
-        System.out.println("get(2)" + uptcList.get(2).getName() + " " + uptcList.get(2).getLastName());
-        System.out.println("get(5)" + uptcList.get(5).getName() + " " + uptcList.get(5).getLastName());
+         */
 
-        System.out.println("\n Prueba Iterator");
-        Iterator<Person> myIterator = uptcList.iterator();
-        while (myIterator.hasNext()) {
-            Person actualPerson = myIterator.next();
-            System.out.println(actualPerson.getName() + " " + actualPerson.getLastName());
-        }
+        System.out.println("Removed: "+uptcList.remove(0).getLastName() + "\n");
         //uptcList.remove(1);
         //uptcList.remove(3);
         showInfo(uptcList);

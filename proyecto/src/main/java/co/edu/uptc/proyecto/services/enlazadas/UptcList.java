@@ -160,34 +160,33 @@ public class UptcList<T> implements List<T>{
     }
 
     @Override
-    public T remove(int pos) {
+    public T remove(int index) {
         Nodo<T> before = header;
-        Nodo<T> elementDeleted = header;
-        int index = 0;
-        boolean found = false;
+        Nodo<T> deleted = header;
 
-        while(index < pos && elementDeleted.getNext()!=null && !found){
-            //Verifica si el elemento a eliminar es el primero o el ultimo de la lista
-            if ((index == pos && index == 0) || (index == pos && elementDeleted.equals(footer))) {
-                System.out.println("");
-                before.setNext(null); 
-                found = true;
-            }
-            else if (index == pos){
-                elementDeleted.setNext(null);
-                before.setNext(elementDeleted.getNext());
-                found = true;
-            }
-            else if (index == 0){
-                elementDeleted = elementDeleted.getNext();
-            }
-            else{
-                before = elementDeleted;
-                elementDeleted = elementDeleted.getNext();
-            }
+        if (deleted == null) {
+            throw new NoSuchElementException("The list is empty");
         }
-        if(found) throw new IndexOutOfBoundsException();
-        return elementDeleted.getInfo();
+        try{
+            for(int i =0; i < index; i++){
+                before = deleted;
+                deleted = deleted.getNext();
+
+                if (deleted == null){
+                    throw new IndexOutOfBoundsException("Index specified is out of bounds");
+                }
+            }
+        }catch (IndexOutOfBoundsException e){
+            e.printStackTrace();
+        }
+        //Evaluar para eliminar el index 0 de la lista
+        if (before != deleted){
+            before.setNext(deleted.getNext());
+        }else {
+            header = deleted.getNext();
+        }
+
+        return deleted.getInfo();
     }
         
 

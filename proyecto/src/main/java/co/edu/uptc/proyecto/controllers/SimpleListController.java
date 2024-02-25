@@ -20,16 +20,8 @@ public class SimpleListController {
         prueba.add("C");
         prueba.add("D");
 
-        prueba.add(1, "Prueba");
-        Iterator<String> it = prueba.iterator();
-
-        while(it.hasNext()){
-            String s = it.next();
-            System.out.println(s);
-        }
-        System.out.println(it.next());
-        //prueba.remove(5);
-        //mostrarArray(prueba);
+        System.out.println(prueba.remove(3)+ "\n");
+        mostrarArray(prueba);
         return "Prueba hecha";
     }
 
