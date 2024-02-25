@@ -58,13 +58,13 @@ public class messageController {
         uptcList.add(persona5);
         uptcList.add(5, persona6);
 
-        //System.out.println("Empty " + uptcList.isEmpty());
-        //System.out.println("Size: " + uptcList.size());
-        //System.out.println("Empty: "+ uptcList.isEmpty());
+
+        System.out.println("Size: " + uptcList.size());
+        System.out.println("Empty: "+ uptcList.isEmpty());
 
         showInfo(uptcList);
 
-        return "HOLA uptc";
+        return "HOLA UPTC";
     }
 
     public void showInfo(List<Person> uptcList ){

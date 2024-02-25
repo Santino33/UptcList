@@ -53,7 +53,7 @@ public class UptcList<T> implements List<T>{
 
     @Override
     public boolean isEmpty() {
-        return header != null;
+        return header == null;
     }
 
     @Override
@@ -297,7 +297,7 @@ public class UptcList<T> implements List<T>{
 
         @Override
         public boolean hasNext() {
-            return actualIndex < size;
+            return actualIndex < size-1;
         }
 
         @Override
