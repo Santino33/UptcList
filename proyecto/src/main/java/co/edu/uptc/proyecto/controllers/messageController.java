@@ -10,6 +10,7 @@ import co.edu.uptc.proyecto.services.enlazadas.Nodo;
 import co.edu.uptc.proyecto.services.enlazadas.UptcList;
 
 import java.util.Iterator;
+import java.util.List;
 
 @RestController
 @RequestMapping("/message")
@@ -57,19 +58,20 @@ public class messageController {
         uptcList.add(persona5);
         uptcList.add(5, persona6);
 
-        uptcList.clear();
-        System.out.println("Size: " + uptcList.size());
+        //System.out.println("Empty " + uptcList.isEmpty());
+        //System.out.println("Size: " + uptcList.size());
+        //System.out.println("Empty: "+ uptcList.isEmpty());
 
         showInfo(uptcList);
 
         return "HOLA uptc";
     }
 
-    public void showInfo(UptcList <Person> uptcList ){
+    public void showInfo(List<Person> uptcList ){
         Iterator<Person> it = uptcList.iterator();
+        int counter = 0;
         while (it.hasNext()){
-            int counter = 0;
-            System.out.println(it.next().getName() + " " + it.next().getLastName()+ " -> " + counter);
+            System.out.println(it.next().getLastName()+ " -> " + counter);
             counter++;
         }
     }

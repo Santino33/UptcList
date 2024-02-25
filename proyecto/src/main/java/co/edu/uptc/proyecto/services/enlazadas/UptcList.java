@@ -40,8 +40,10 @@ public class UptcList<T> implements List<T>{
 
     @Override
     public int size() {
+        if (isEmpty()) return 0;
+
         Nodo temp = header;
-        int counter = 0;
+        int counter = 1;
         while (temp.getNext() != null){
             counter++;
             temp = temp.getNext();
@@ -51,8 +53,7 @@ public class UptcList<T> implements List<T>{
 
     @Override
     public boolean isEmpty() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isEmpty'");
+        return header != null;
     }
 
     @Override
