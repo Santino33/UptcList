@@ -9,6 +9,8 @@ import co.edu.uptc.proyecto.services.PersonService;
 import co.edu.uptc.proyecto.services.enlazadas.Nodo;
 import co.edu.uptc.proyecto.services.enlazadas.UptcList;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -28,16 +30,16 @@ public class messageController {
         UptcList <Person> uptcList = new UptcList<Person>();
     
         Person persona1 = new Person();
-        persona1.setName("Checo");
-        persona1.setLastName("Perez");
+        persona1.setName("David");
+        persona1.setLastName("Coulthard");
 
         Person persona2 = new Person();
         persona2.setName("Max");
         persona2.setLastName("Verstappen");
 
         Person persona3 = new Person();
-        persona3.setName("Carlos");
-        persona3.setLastName("Sainz");
+        persona3.setName("Lewis");
+        persona3.setLastName("Hamilton");
 
         Person persona4 = new Person();
         persona4.setName("Lando");
@@ -48,19 +50,20 @@ public class messageController {
         persona5.setLastName("Button");
 
         Person persona6 = new Person();
-        persona6.setName("George");
-        persona6.setLastName("Russell");
+        persona6.setName("Alex");
+        persona6.setLastName("Albon");
 
         uptcList.add(persona1);
-        //uptcList.add(persona2);
+        uptcList.add(persona2);
         uptcList.add(persona3);
         uptcList.add(persona4);
         uptcList.add(persona5);
         uptcList.add(persona6);
 
+        System.out.println("Antes de comparar");
         showInfo(uptcList);
-        System.out.println("Piloto reempleazado: "+uptcList.set(5, persona2).getLastName());
-        System.out.println("Tamaño: " + uptcList.size() + "\n");
+        compararLista(uptcList);
+        System.out.println("\nDespues de comparar");
         showInfo(uptcList);
 
         return "HOLA UPTC";
@@ -73,5 +76,24 @@ public class messageController {
             System.out.println(it.next().getLastName()+ " -> " + counter);
             counter++;
         }
+    }
+
+    public void mostrarArray(Object[] array){
+        for (Object p : array){
+            Person p1 = (Person) p;
+            System.out.println(p1.getLastName());
+        }
+    }
+
+    public void compararLista(List<Person> uptcList){
+
+        Comparator<Person> comparador = new Comparator<Person>() {
+            @Override
+            public int compare(Person s1, Person s2) {
+                return s1.getLastName().compareTo(s2.getLastName());
+            }
+        };
+
+        Collections.sort(uptcList, comparador);
     }
 }

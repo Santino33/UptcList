@@ -1,5 +1,7 @@
 package co.edu.uptc.proyecto.services.enlazadas;
 
+import org.springframework.http.converter.json.GsonBuilderUtils;
+
 import java.util.*;
 
 public class UptcList<T> implements List<T>{
@@ -74,8 +76,13 @@ public class UptcList<T> implements List<T>{
 
     @Override
     public Object[] toArray() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toArray'");
+        Nodo temp = header;
+        Object[] array = new Object[size()];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = temp.getInfo();
+            temp = temp.getNext();
+        }
+        return array;
     }
 
     @Override
