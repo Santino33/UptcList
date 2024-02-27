@@ -52,16 +52,15 @@ public class messageController {
         persona6.setLastName("Russell");
 
         uptcList.add(persona1);
-        uptcList.add(persona2);
+        //uptcList.add(persona2);
         uptcList.add(persona3);
         uptcList.add(persona4);
         uptcList.add(persona5);
-        uptcList.add(5, persona6);
+        uptcList.add(persona6);
 
-
-        System.out.println("Size: " + uptcList.size());
-        System.out.println("Empty: "+ uptcList.isEmpty());
-
+        showInfo(uptcList);
+        System.out.println("Piloto reempleazado: "+uptcList.set(5, persona2).getLastName());
+        System.out.println("Tamaño: " + uptcList.size() + "\n");
         showInfo(uptcList);
 
         return "HOLA UPTC";

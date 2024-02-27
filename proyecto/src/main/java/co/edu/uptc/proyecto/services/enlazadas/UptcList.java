@@ -136,8 +136,31 @@ public class UptcList<T> implements List<T>{
 
     @Override
     public T set(int index, T element) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'set'");
+        Nodo<T> temp = new Nodo<T>();
+        Nodo<T> before = header;
+        Nodo<T> replaced = header;
+        temp.setInfo(element);
+
+        try{
+            if (index == 0) {
+                header = temp;
+                temp.setNext(replaced.getNext());
+            }else{
+                for (int i = 0; i < index; i++) {
+                    before = replaced;
+                    replaced = replaced.getNext();
+                    if (replaced == null) {
+                        throw new IndexOutOfBoundsException("Index "+ i + " out of bounds " + size());
+                    }
+                }
+                before.setNext(temp);
+                temp.setNext(replaced.getNext());
+            }
+
+        }catch (IndexOutOfBoundsException e){
+            e.printStackTrace();
+        }
+        return replaced.getInfo();
     }
 
     @Override
