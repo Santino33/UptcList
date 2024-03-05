@@ -87,13 +87,11 @@ public class messageController {
 
     public void compararLista(List<Person> uptcList){
 
-        Comparator<Person> comparador = new Comparator<Person>() {
+        Collections.sort(uptcList, new Comparator<Person>() {
             @Override
-            public int compare(Person s1, Person s2) {
-                return s1.getLastName().compareTo(s2.getLastName());
+            public int compare(Person o1, Person o2) {
+                return o1.getLastName().compareTo(o2.getLastName());
             }
-        };
-
-        Collections.sort(uptcList, comparador);
+        });
     }
 }

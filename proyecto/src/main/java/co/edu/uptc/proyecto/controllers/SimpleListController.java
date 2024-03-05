@@ -43,17 +43,13 @@ public class SimpleListController {
         prueba.add(persona1);
         prueba.add(persona5);
         prueba.add(persona4);
-        System.out.println("Antes de la organizacion");
-        mostrarArrayPerson(prueba);
-        Collections.sort(prueba, new Comparator<Person>() {
+
+        prueba.sort(new Comparator<Person>() {
             @Override
             public int compare(Person o1, Person o2) {
                 return o1.getLastName().compareTo(o2.getLastName());
             }
         });
-        System.out.println("\nDespues de la organizacion");
-
-        System.out.println("Seteado a la posicion 6: "+prueba.set(6, persona2).getLastName());
         mostrarArrayPerson(prueba);
         return "Prueba hecha";
     }
@@ -71,6 +67,17 @@ public class SimpleListController {
             System.out.println(it.next().getLastName()+ " -> " + counter);
             counter++;
         }
+    }
+
+    public void ordenar(List<Person> prueba){
+        Collections.sort(prueba, new Comparator<Person>() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                return o1.getLastName().compareTo(o2.getLastName());
+            }
+        });
+        System.out.println("\nDespues de la organizacion");
+
     }
     
 }

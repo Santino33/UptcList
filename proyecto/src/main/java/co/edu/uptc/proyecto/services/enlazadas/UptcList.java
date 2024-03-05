@@ -251,8 +251,7 @@ public class UptcList<T> implements List<T>{
 
     @Override
     public ListIterator<T> listIterator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listIterator'");
+        return new MyListIterator();
     }
 
     @Override
@@ -341,6 +340,77 @@ public class UptcList<T> implements List<T>{
             actualIndex++;
             temp = temp.getNext();
             return (T)(temp.getInfo());
+        }
+    }
+
+    private class MyListIterator implements ListIterator<T> {
+        private int actualIndex;
+        private int size;
+        private Nodo temp;
+
+        public MyListIterator() {
+            actualIndex = 0;
+            size = size();
+        }
+
+
+        @Override
+        public boolean hasNext() {
+            return actualIndex < size-1;
+        }
+
+        @Override
+        public T next() {
+            if(!hasNext()){
+                throw new NoSuchElementException("There are no more elements");
+            } else if (temp == null) {
+                temp = header;
+                return (T) temp.getInfo();
+            }
+            actualIndex++;
+            temp = temp.getNext();
+            return (T)(temp.getInfo());
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return false;
+        }
+
+        @Override
+        public T previous() {
+            return null;
+        }
+
+        @Override
+        public int nextIndex() {
+            return 0;
+        }
+
+        @Override
+        public int previousIndex() {
+            return 0;
+        }
+
+        @Override
+        public void remove() {
+
+        }
+
+        @Override
+        public void set(T t) {
+            if (temp != null) {
+                temp.setInfo(t);
+            } else {
+                throw new IllegalStateException();
+        }
+
+
+        }
+
+        @Override
+        public void add(T t) {
+
         }
     }
 
