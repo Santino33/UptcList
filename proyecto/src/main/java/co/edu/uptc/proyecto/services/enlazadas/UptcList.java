@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+
 import java.util.*;
 
 public class UptcList<T> implements List<T>{
@@ -44,14 +45,20 @@ public class UptcList<T> implements List<T>{
 
     @Override
     public int size() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'size'");
+        if (isEmpty()) return 0;
+
+        Nodo temp = header;
+        int counter = 1;
+        while (temp.getNext() != null){
+            counter++;
+            temp = temp.getNext();
+        }
+        return counter;
     }
 
     @Override
     public boolean isEmpty() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isEmpty'");
+        return header == null;
     }
 
     @Override
@@ -67,14 +74,18 @@ public class UptcList<T> implements List<T>{
 
     @Override
     public Iterator<T> iterator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'iterator'");
+        return new MyIterator();
     }
 
     @Override
     public Object[] toArray() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toArray'");
+        Nodo temp = header;
+        Object[] array = new Object[size()];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = temp.getInfo();
+            temp = temp.getNext();
+        }
+        return array;
     }
 
     @Override
@@ -115,19 +126,51 @@ public class UptcList<T> implements List<T>{
 
     @Override
     public void clear() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'clear'");
+        Nodo<T> temp = header;
+        Nodo<T> before = header;
+        while (temp.getNext() != null) {
+            before = temp;
+            temp = temp.getNext();
+            before.setNext(null);
+        }
     }
 
     @Override
     public T get(int pos) {
-        throw new UnsupportedOperationException("Unimplemented method 'set'");
+        Nodo<T> aux = header;
+        for (int i = 0; i < pos; i++) {
+            aux = aux.getNext();
+        }
+        return (T) aux.getInfo();
     }
 
     @Override
     public T set(int index, T element) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'set'");
+        Nodo<T> temp = new Nodo<T>();
+        Nodo<T> before = header;
+        Nodo<T> replaced = header;
+        temp.setInfo(element);
+
+        try{
+            if (index == 0) {
+                header = temp;
+                temp.setNext(replaced.getNext());
+            }else{
+                for (int i = 0; i < index; i++) {
+                    before = replaced;
+                    replaced = replaced.getNext();
+                    if (replaced == null) {
+                        throw new IndexOutOfBoundsException("Index "+ i + " out of bounds " + size());
+                    }
+                }
+                before.setNext(temp);
+                temp.setNext(replaced.getNext());
+            }
+
+        }catch (IndexOutOfBoundsException e){
+            e.printStackTrace();
+        }
+        return replaced.getInfo();
     }
 
     @Override
@@ -156,34 +199,30 @@ public class UptcList<T> implements List<T>{
     }
 
     @Override
-    public T remove(int pos) {
+    public T remove(int index) {
         Nodo<T> before = header;
-        Nodo<T> elementDeleted = header;
-        int index = 0;
-        boolean found = false;
+        Nodo<T> deleted = header;
 
-        while(index < pos && elementDeleted.getNext()!=null && !found){
-            //Verifica si el elemento a eliminar es el primero o el ultimo de la lista
-            if ((index == pos && index == 0) || (index == pos && elementDeleted.equals(footer))) {
-                System.out.println("");
-                before.setNext(null); 
-                found = true;
-            }
-            else if (index == pos){
-                elementDeleted.setNext(null);
-                before.setNext(elementDeleted.getNext());
-                found = true;
-            }
-            else if (index == 0){
-                elementDeleted = elementDeleted.getNext();
-            }
-            else{
-                before = elementDeleted;
-                elementDeleted = elementDeleted.getNext();
+        if (deleted == null) {
+            throw new NoSuchElementException("The list is empty");
+        }
+        for(int i =0; i < index; i++){
+            before = deleted;
+            deleted = deleted.getNext();
+
+            if (deleted == null){
+                throw new IndexOutOfBoundsException("Index specified is out of bounds");
             }
         }
-        if(found) throw new IndexOutOfBoundsException();
-        return elementDeleted.getInfo();
+
+        //Evaluar para eliminar el index 0 de la lista
+        if (before != deleted){
+            before.setNext(deleted.getNext());
+        }else {
+            header = deleted.getNext();
+        }
+
+        return deleted.getInfo();
     }
         
 
@@ -215,8 +254,7 @@ public class UptcList<T> implements List<T>{
 
     @Override
     public ListIterator<T> listIterator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listIterator'");
+        return new MyListIterator();
     }
 
     @Override
@@ -275,6 +313,108 @@ public class UptcList<T> implements List<T>{
             }else temp = temp.getNext();
         }
         return temp;
+    }
+
+
+
+    private class MyIterator implements Iterator<T>{
+
+        private int actualIndex;
+        private int size;
+        private Nodo temp;
+        public MyIterator() {
+            actualIndex = 0;
+            size = size();
+        }
+
+        @Override
+        public boolean hasNext() {
+            return actualIndex < size-1;
+        }
+
+        @Override
+        public T next() {
+            if(!hasNext()){
+                throw new NoSuchElementException("There are no more elements");
+            } else if (temp == null) {
+                temp = header;
+                return (T) temp.getInfo();
+            }
+            actualIndex++;
+            temp = temp.getNext();
+            return (T)(temp.getInfo());
+        }
+    }
+
+    private class MyListIterator implements ListIterator<T> {
+        private int actualIndex;
+        private int size;
+        private Nodo temp;
+
+        public MyListIterator() {
+            actualIndex = 0;
+            size = size();
+        }
+
+
+        @Override
+        public boolean hasNext() {
+            return actualIndex < size-1;
+        }
+
+        @Override
+        public T next() {
+            if(!hasNext()){
+                throw new NoSuchElementException("There are no more elements");
+            } else if (temp == null) {
+                temp = header;
+                return (T) temp.getInfo();
+            }
+            actualIndex++;
+            temp = temp.getNext();
+            return (T)(temp.getInfo());
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return false;
+        }
+
+        @Override
+        public T previous() {
+            return null;
+        }
+
+        @Override
+        public int nextIndex() {
+            return 0;
+        }
+
+        @Override
+        public int previousIndex() {
+            return 0;
+        }
+
+        @Override
+        public void remove() {
+
+        }
+
+        @Override
+        public void set(T t) {
+            if (temp != null) {
+                temp.setInfo(t);
+            } else {
+                throw new IllegalStateException();
+        }
+
+
+        }
+
+        @Override
+        public void add(T t) {
+
+        }
     }
 
 
